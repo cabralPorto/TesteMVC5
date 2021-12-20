@@ -7,30 +7,30 @@ using TesteMVC5.Models;
 
 namespace TesteMVC5.Controllers
 {
+    
+    
+    
     public class AlunoController : Controller
     {   
+        [HttpGet]
         [Route("novo-aluno")]
-        public ActionResult Novo(Aluno aluno)
-        {
-            aluno = new Aluno
-
-            {
-                Name = "",
-                CPF = "",
-                DataMatricula = DateTime.Now,
-                Email = "ronaldoemail.com",
-                Ativo = false
-
-            };
-   
-            return RedirectToAction("Index", aluno);
+       
+        public ActionResult NovoAluno()
+        {       
+                return View();
         }
-        ActionResult Index(Aluno aluno)
-            {
-                if (!ModelState.IsValid) return View(aluno);
-                
-                return View(aluno);
-            }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+       [Route("novo-aluno")]
+        public ActionResult NovoAluno(Aluno aluno)
+
+        {
+            if (!ModelState.IsValid) return View(aluno);
+
+            //Regra de N
+            return View(aluno);
+        }
         
     }
 }
